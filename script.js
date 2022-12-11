@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
   getAll().then((apiBooks) => (bookList = apiBooks));
 });
 
+
 searchField.addEventListener('keyup', (e) =>
   renderBookList(
     bookList.filter(({ title, author }) => {
@@ -18,6 +19,7 @@ searchField.addEventListener('keyup', (e) =>
   )
 );
 
+
 function renderBookList(bookList) {
   const existingElement = document.querySelector('.book-list');
 
@@ -29,6 +31,15 @@ function renderBookList(bookList) {
 };
 
 
+function showDetail(e) {
+  getOne(e.id).then((book) => {
+  e.insertAdjacentHTML('beforeend', BookDetail(book));
+
+})
+};
 
 
-
+function hideDetail() {
+  const removeDetail = document.getElementById(`bookDetail`);
+  removeDetail.remove();
+};
